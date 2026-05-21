@@ -1,0 +1,34 @@
+---
+---
+
+<div id="lightbox-root">
+  <dialog
+    id="image-lightbox"
+    class="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm p-4 m-0 w-full h-full max-w-none max-h-none hidden open:flex items-center justify-center"
+    aria-label="Image viewer"
+  >
+    <div class="relative max-w-5xl w-full max-h-[90vh] flex flex-col items-center gap-4">
+      <button
+        id="lightbox-close"
+        class="absolute -top-12 right-0 text-white hover:text-accent transition-colors p-2 focus:outline-none focus:ring-2 focus:ring-accent rounded"
+        aria-label="Close lightbox"
+        autofocus
+      >
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M18 6L6 18M6 6l12 12" />
+        </svg>
+      </button>
+
+      <img
+        id="lightbox-image"
+        src=""
+        alt=""
+        class="max-w-full max-h-[70vh] object-contain rounded-lg"
+      />
+
+      <span id="lightbox-title" class="text-white text-lg font-medium"></span>
+    </div>
+  </dialog>
+</div>
+
+<script src="../scripts/lightbox.js"></script>

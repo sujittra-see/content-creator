@@ -1,0 +1,136 @@
+---
+import type { NavigationItem } from '../data/navigation';
+
+interface Props {
+  items: NavigationItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 h-16 bg-background/80 backdrop-blur-lg border-b border-secondary/50" role="banner">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between" aria-label="Main navigation">
+    <a href="#hero" class="flex items-center gap-2 no-underline group" aria-label="Go to top">
+      <span class="font-bold text-xl text-primary">Third</span>
+      <span class="text-xs text-text-muted hidden sm:inline group-hover:text-accent transition-colors duration-200">HR Content Creator</span>
+    </a>
+
+    <ul class="hidden md:flex items-center gap-1" role="list">
+      {items.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class="text-sm font-medium text-text-muted hover:text-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded-lg px-3 py-1.5"
+            data-nav-link={item.id}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <button
+      id="mobile-menu-toggle"
+      class="md:hidden p-2 rounded-lg text-text-primary hover:bg-secondary/50 active:scale-95 transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-accent"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </nav>
+
+  <div
+    id="mobile-menu"
+    class="md:hidden hidden fixed inset-0 top-16 bg-background/95 backdrop-blur-lg z-40"
+    role="dialog"
+    aria-label="Mobile navigation"
+  >
+    <ul class="flex flex-col items-center gap-6 pt-12" role="list">
+      {items.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class="text-lg font-medium text-text-primary hover:text-accent transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent rounded-lg px-3 py-2"
+            data-mobile-link={item.id}
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</header>
+
+<script>
+  function initMobileMenu() {
+    const toggle = document.getElementById('mobile-menu-toggle');
+    const menu = document.getElementById('mobile-menu');
+    if (!toggle || !menu) return;
+
+    const closeMenu = () => {
+      menu.classList.add('hidden');
+      if (toggle) toggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    };
+
+    const openMenu = () => {
+      menu.classList.remove('hidden');
+      toggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    };
+
+    toggle.addEventListener('click', () => {
+      const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      if (isOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    menu.querySelectorAll('a[data-mobile-link]').forEach((link) => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        closeMenu();
+      }
+    });
+  }
+
+  function initScrollSpy() {
+    const navLinks = document.querySelectorAll('[data-nav-link]');
+    const sections = document.querySelectorAll('section[id]');
+
+    if (navLinks.length === 0 || sections.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+    navLinks.forEach((link) => {
+      const linkId = link.getAttribute('data-nav-link');
+      if (linkId === id) {
+        link.classList.add('text-primary', 'bg-primary/5');
+        link.classList.remove('text-text-muted');
+      } else {
+        link.classList.remove('text-primary', 'bg-primary/5');
+        link.classList.add('text-text-muted');
+      }
+    });
+          }
+        }
+      },
+      { rootMargin: '-80px 0px -20% 0px', threshold: 0.1 }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+  }
+
+  initMobileMenu();
+  initScrollSpy();
+</script>

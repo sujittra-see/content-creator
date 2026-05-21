@@ -1,0 +1,83 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-primary: #1E3A5F;
+  --color-secondary: #E8E4DD;
+  --color-background: #FCFAF7;
+  --color-accent: #5B6ABF;
+  --color-text-primary: #1A1A1C;
+  --color-text-muted: #6B6D72;
+  --color-slate-50: #F5F1EC;
+
+  --font-playfair: 'Playfair Display', serif;
+  --font-inter: 'Inter', sans-serif;
+
+  --animate-fade-up: fade-up 0.5s ease-out forwards;
+}
+
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --shadow-color: 214deg 23% 14%;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    font-family: var(--font-inter);
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-playfair);
+    font-weight: 700;
+    text-wrap: balance;
+  }
+
+  h1 {
+    letter-spacing: -0.03em;
+  }
+
+  h2 {
+    letter-spacing: -0.02em;
+  }
+
+  img-comparison-slider {
+    --divider-width: 2px;
+    --divider-color: theme('colors.accent');
+    --default-handle-width: 40px;
+    display: block;
+    width: 100%;
+  }
+}

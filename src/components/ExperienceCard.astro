@@ -1,0 +1,101 @@
+---
+import type { ExperienceEntry } from '../data/types';
+import { imagePath } from '../utils/image';
+
+interface Props {
+  entry: ExperienceEntry;
+}
+
+const { entry } = Astro.props;
+const { title, role, category, dateRange, tags, tools, metrics, image, figmaEmbedUrl, externalUrl } = entry;
+---
+
+<article class="bg-white rounded-2xl shadow-[0_1px_3px_rgb(0,0,0,0.04),0_4px_12px_rgb(0,0,0,0.03)] hover:shadow-[0_1px_3px_rgb(0,0,0,0.06),0_8px_24px_rgb(0,0,0,0.04)] hover:-translate-y-0.5 transition-all duration-300 overflow-hidden flex flex-col h-full">
+  <figure class="relative overflow-hidden">
+    <img
+      src={imagePath(image)}
+      alt={`${title} - ${role}`}
+      class="w-full aspect-[4/3] object-cover"
+      loading="lazy"
+      width="400"
+      height="300"
+    />
+    <span class="absolute top-3 left-3 bg-background/90 backdrop-blur-sm text-primary text-xs font-semibold px-3 py-1 rounded-md shadow-sm">
+      {category === 'professional' ? 'Professional' : 'Academic'}
+    </span>
+  </figure>
+
+  <div class="p-5 flex flex-col gap-3 flex-1">
+    <div class="flex flex-col gap-1">
+      <span class="text-xs text-text-muted font-medium tracking-wide uppercase">{dateRange}</span>
+      <span class="text-sm font-semibold text-primary">{role}</span>
+    </div>
+
+    <h3 class="text-lg font-bold">{title}</h3>
+
+    <div class="flex flex-wrap gap-1.5">
+      {tags.map((tag: string) => (
+        <span class="bg-accent/8 text-accent text-xs font-medium px-2.5 py-1 rounded-md">{tag}</span>
+      ))}
+    </div>
+
+    <div class="text-sm text-text-muted leading-relaxed flex-1">
+      <slot />
+    </div>
+
+    {metrics && (
+      <div class="bg-primary/3 rounded-xl p-3 text-sm font-semibold text-primary">
+        {metrics}
+      </div>
+    )}
+
+    {tools && tools.length > 0 && (
+      <div class="flex flex-wrap gap-1.5 mt-auto pt-2 border-t border-secondary/50">
+        {tools.map((tool: string) => (
+          <span class="bg-secondary/60 text-text-muted text-xs font-medium px-2 py-0.5 rounded-md">{tool}</span>
+        ))}
+      </div>
+    )}
+
+    {figmaEmbedUrl && (
+      <div class="mt-3 flex flex-col gap-2">
+        <div class="relative w-full aspect-video rounded-xl overflow-hidden border border-secondary/50 bg-slate-50">
+          <iframe
+            style="border: 0;"
+            class="absolute inset-0 w-full h-full"
+            src={figmaEmbedUrl}
+            title={`${title} Figma Prototype`}
+            loading="lazy"
+            allowfullscreen
+          >
+          </iframe>
+        </div>
+        <a
+          href={figmaEmbedUrl.replace('/embed', '')}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-2 bg-primary/5 hover:bg-primary/10 text-primary text-xs font-semibold py-2 px-4 rounded-lg border border-primary/10 hover:border-primary/20 active:scale-[0.97] transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-accent"
+        >
+          Open Prototype in Figma
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
+          </svg>
+        </a>
+      </div>
+    )}
+
+    {externalUrl && (
+      <a
+        href={externalUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-1.5 text-sm font-semibold text-accent hover:underline focus:outline-none focus:ring-2 focus:ring-accent rounded px-1 py-0.5 mt-2"
+      >
+        View Project
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
+        </svg>
+      </a>
+    )}
+  </div>
+</article>

@@ -1,0 +1,32 @@
+---
+import type { ImageGalleryItem } from '../data/activities';
+import { imagePath } from '../utils/image';
+
+interface Props {
+  items: ImageGalleryItem[];
+  aspectClass?: string;
+}
+
+const { items, aspectClass = 'aspect-[4/3]' } = Astro.props;
+---
+
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+  {items.map((item, i) => (
+    <figure class="group cursor-pointer opacity-0 animate-fade-up" style={`animation-delay: ${i * 60}ms`} data-lightbox-trigger data-image={imagePath(item.image)} data-alt={item.alt} data-title={item.title}>
+      <div class={`overflow-hidden rounded-xl ${aspectClass} shadow-[0_1px_3px_rgb(0,0,0,0.04),0_4px_12px_rgb(0,0,0,0.02)]`}>
+        <img
+          src={imagePath(item.image)}
+          alt={item.alt}
+          class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+          loading="lazy"
+          width="320"
+          height="240"
+        />
+      </div>
+      <figcaption class="mt-2.5 text-center text-sm text-text-muted">
+        {item.title}
+        {item.year && <span class="text-text-muted/50"> &middot; {item.year}</span>}
+      </figcaption>
+    </figure>
+  ))}
+</div>
