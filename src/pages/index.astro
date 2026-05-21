@@ -47,10 +47,10 @@ const showPhone = profile.phone !== '##PLACEHOLDER##';
 
       <div class="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 gap-8 px-4 pb-8 sm:gap-10 sm:px-6 sm:pb-10 lg:grid-cols-12 lg:items-end lg:px-8 lg:pb-14">
         <div class="order-2 min-w-0 lg:order-1 lg:col-span-7 lg:pb-10">
-          <p class="eyebrow mb-4 max-w-full break-words sm:mb-5">HR content creator / UX/UI designer</p>
+          <p class="eyebrow mb-4 max-w-full break-words sm:mb-5">Human Resources Content Creator</p>
           <h1 class="max-w-4xl break-words text-[clamp(2.85rem,14vw,8.25rem)] font-semibold leading-[0.84] text-primary sm:text-[clamp(3.4rem,11vw,8.25rem)] sm:leading-[0.82]">
             Eve<br />
-            <span class="font-playfair italic text-accent">Sujittra</span>
+            <span class="text-accent">Sujittra</span>
           </h1>
           <div class="mt-6 max-w-full border-l border-primary/18 pl-4 sm:mt-8 sm:max-w-2xl sm:pl-5">
             <p class="text-lg leading-relaxed text-primary sm:text-2xl">
@@ -290,7 +290,7 @@ const showPhone = profile.phone !== '##PLACEHOLDER##';
           Before and after photo editing. Drag each slider to inspect tone, recovery, and color treatment.
         </p>
       </div>
-      <div class="mx-auto grid max-w-6xl grid-cols-1 gap-7 md:grid-cols-2">
+      <div class="mx-auto grid max-w-6xl grid-cols-1 gap-7 md:grid-cols-4">
         {creativeWorks.map((work) => (
           <ComparisonSlider item={work} />
         ))}

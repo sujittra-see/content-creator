@@ -3,7 +3,7 @@ title: "Showcase 8th 2026"
 role: "Media Production Officer"
 category: "professional"
 dateRange: "Aug 2025 – Jan 2026"
-tags: ["VideoProduction", "Storyboarding", "ContentStrategy"]
+tags: ["VideoProduction", "Storyboarding", "ContentStrategy", "Event"]
 metrics: "3,678 views & 95 likes"
 image: "/images/showcase.jpg"
 order: 2

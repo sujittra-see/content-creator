@@ -3,7 +3,7 @@ title: "iTalk 7 2025"
 role: "Public Relations Officer"
 category: "professional"
 dateRange: "May – Aug 2025"
-tags: ["ContentWriting", "SocialMedia", "PR"]
+tags: ["ContentWriting", "SocialMedia", "PR", "Event"]
 image: "/images/iTalk-1.jpg"
 order: 3
 ---
