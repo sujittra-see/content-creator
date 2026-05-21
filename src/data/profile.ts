@@ -1,3 +1,5 @@
+import { SITE_URL } from '../utils/url';
+
 export interface ProfileData {
   name: string;
   nickname: string;
@@ -23,5 +25,5 @@ export const profile: ProfileData = {
   location: 'Khon Kaen, Thailand',
   resumeUrl: 'https://drive.google.com/file/d/1example-resume-link/view?usp=sharing',
   figmaEmbedUrl: 'https://www.figma.com/embed?embed_host=astra&url=https://www.figma.com/proto/example-restaurant-search-prototype',
-  siteUrl: 'https://sujittra-see.github.io/content-creator',
+  siteUrl: `${SITE_URL}/content-creator`,
 };

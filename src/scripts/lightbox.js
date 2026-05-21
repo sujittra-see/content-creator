@@ -11,13 +11,25 @@ function initLightbox() {
 
   var returnFocus = null;
 
+  function lockScroll() {
+    document.body.dataset.lightboxLock = 'true';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function unlockScroll() {
+    delete document.body.dataset.lightboxLock;
+    if (document.body.dataset.mobileMenuLock !== 'true') {
+      document.body.style.overflow = '';
+    }
+  }
+
   function openLightbox(image, alt, title) {
     returnFocus = document.activeElement;
     lightboxImage.src = image;
     lightboxImage.alt = alt;
     lightboxTitle.textContent = title;
     
-    document.body.style.overflow = 'hidden';
+    lockScroll();
     if (typeof lightbox.showModal === 'function') {
       lightbox.showModal();
     } else {
@@ -37,7 +49,8 @@ function initLightbox() {
   }
 
   function cleanupLightbox() {
-    document.body.style.overflow = '';
+    unlockScroll();
+    lightboxImage.src = '';
     if (returnFocus) {
       returnFocus.focus();
       returnFocus = null;

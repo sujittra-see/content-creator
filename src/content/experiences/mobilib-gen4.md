@@ -5,7 +5,6 @@ category: "professional"
 dateRange: "Oct 2024 – Sep 2025"
 tags: ["DigitalStrategy", "DataAnalysis", "PricingStrategy"]
 metrics: "75% Photo Booth / 25% Souvenir"
-image: "/images/M1.png"
 order: 4
 ---
 

@@ -12,7 +12,7 @@ export interface ExperienceEntry {
   tags: string[];
   tools?: string[] | undefined;
   metrics?: string | undefined;
-  image: string;
+  image?: string | undefined;
   featured?: boolean | undefined;
   order: number;
   figmaEmbedUrl?: string | undefined;

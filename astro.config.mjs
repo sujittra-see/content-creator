@@ -5,7 +5,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  site: 'https://yourusername.github.io',
+  site: 'https://sujittra-see.github.io',
   base: '/content-creator/',
   output: 'static',
 });

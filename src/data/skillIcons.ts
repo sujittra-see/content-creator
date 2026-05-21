@@ -1,0 +1,7 @@
+export const skillIconSvg: Record<string, string> = {
+  camera: '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1E3A5F" stroke-width="1.5" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>',
+  sliders: '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1E3A5F" stroke-width="1.5" aria-hidden="true"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>',
+  layers: '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1E3A5F" stroke-width="1.5" aria-hidden="true"><polygon points="12 2 22 8.5 12 15 2 8.5 12 2"/><polyline points="2 15.5 12 22 22 15.5"/></svg>',
+  'bar-chart': '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1E3A5F" stroke-width="1.5" aria-hidden="true"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>',
+  'pen-tool': '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1E3A5F" stroke-width="1.5" aria-hidden="true"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>',
+};

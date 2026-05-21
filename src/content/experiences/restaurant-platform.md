@@ -4,7 +4,6 @@ role: "UX/UI Designer & Prototype Developer"
 category: "academic"
 dateRange: "May 2025 – Feb 2026"
 tags: ["UXUI", "Figma", "UserResearch", "Prototype"]
-image: "/images/3.jpg"
 order: 5
 figmaEmbedUrl: "https://www.figma.com/embed?embed_host=astra&url=https://www.figma.com/file/example-restaurant-search"
 ---

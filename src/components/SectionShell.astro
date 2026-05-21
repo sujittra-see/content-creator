@@ -7,8 +7,8 @@ export interface Props {
 const { id, className = '' } = Astro.props;
 ---
 
-<section id={id} class={`min-h-dvh snap-start flex items-center ${className}`}>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-20 lg:py-24">
+<section id={id} class={`relative overflow-hidden ${className}`}>
+  <div class="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 md:py-24 lg:px-8 lg:py-32">
     <slot />
   </div>
 </section>

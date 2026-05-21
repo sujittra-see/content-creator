@@ -1,0 +1,44 @@
+---
+import { getResponsiveImageSources } from '../utils/responsiveImage';
+
+interface Props {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  sizes: string;
+  class?: string;
+  loading?: 'eager' | 'lazy';
+  decoding?: 'async' | 'sync' | 'auto';
+  fetchpriority?: 'high' | 'low' | 'auto';
+}
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  sizes,
+  class: className = '',
+  loading = 'lazy',
+  decoding = 'async',
+  fetchpriority,
+} = Astro.props;
+
+const sources = getResponsiveImageSources(src, width, height);
+---
+
+<picture class="block h-full w-full">
+  {sources.webpSrcset && <source type="image/webp" srcset={sources.webpSrcset} sizes={sizes} />}
+  {sources.jpegSrcset && <source type="image/jpeg" srcset={sources.jpegSrcset} sizes={sizes} />}
+  <img
+    src={sources.src}
+    alt={alt}
+    class={className}
+    loading={loading}
+    decoding={decoding}
+    width={sources.width}
+    height={sources.height}
+    fetchpriority={fetchpriority}
+  />
+</picture>

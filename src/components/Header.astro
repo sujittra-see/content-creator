@@ -6,62 +6,160 @@ interface Props {
 }
 
 const { items } = Astro.props;
+
+const mainLinks = items.filter((i) => ['about', 'skills', 'experience'].includes(i.id));
+const portfolioLinks = items.filter((i) => ['certificates', 'activities', 'works'].includes(i.id));
+const contactItem = items.find((i) => i.id === 'contact');
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 h-16 bg-background/80 backdrop-blur-lg border-b border-secondary/50" role="banner">
-  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between" aria-label="Main navigation">
-    <a href="#hero" class="flex items-center gap-2 no-underline group" aria-label="Go to top">
-      <span class="font-bold text-xl text-primary">Third</span>
-      <span class="text-xs text-text-muted hidden sm:inline group-hover:text-accent transition-colors duration-200">HR Content Creator</span>
+<nav class="fixed left-3 right-3 top-3 z-50 flex justify-center sm:left-4 sm:right-4 sm:top-4" role="banner">
+  <div class="relative flex w-full max-w-4xl items-center justify-between rounded-full border border-primary/10 bg-[var(--surface-strong)]/86 px-3 py-2 shadow-[0_18px_60px_-42px_rgba(39,33,28,0.75)] backdrop-blur-xl transition-[box-shadow,border-color] duration-200 hover:border-primary/18 hover:shadow-[0_20px_70px_-44px_rgba(39,33,28,0.8)] md:px-3">
+
+    <a href="#hero" class="flex shrink-0 items-center gap-2 rounded-full pr-3 no-underline transition-transform active:scale-[0.97]" aria-label="Go to top">
+      <div class="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-background shadow-[inset_0_1px_0_rgba(255,255,255,0.14)]">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5" aria-hidden="true">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+        </svg>
+      </div>
+      <span class="hidden text-sm font-semibold tracking-[-0.01em] text-primary sm:inline">Eve</span>
     </a>
 
-    <ul class="hidden md:flex items-center gap-1" role="list">
-      {items.map((item) => (
-        <li>
-          <a
-            href={item.href}
-            class="text-sm font-medium text-text-muted hover:text-primary transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 rounded-lg px-3 py-1.5"
-            data-nav-link={item.id}
-          >
-            {item.label}
-          </a>
-        </li>
+    <div class="hidden items-center gap-1 md:flex">
+      {mainLinks.map((item) => (
+        <a
+          href={item.href}
+          class="rounded-full px-3 py-2 text-sm font-medium text-text-muted transition-[background-color,color,transform] hover:bg-secondary/55 hover:text-primary active:scale-[0.97]"
+          data-nav-link={item.id}
+        >
+          {item.label}
+        </a>
       ))}
-    </ul>
 
-    <button
-      id="mobile-menu-toggle"
-      class="md:hidden p-2 rounded-lg text-text-primary hover:bg-secondary/50 active:scale-95 transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-accent"
-      aria-label="Toggle menu"
-      aria-expanded="false"
-    >
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-        <path d="M4 6h16M4 12h16M4 18h16" />
-      </svg>
-    </button>
-  </nav>
+      <div class="relative" data-portfolio-root>
+        <button
+          id="portfolio-menu-button"
+          class="flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium text-text-muted transition-[background-color,color,transform] hover:bg-secondary/55 hover:text-primary active:scale-[0.97] focus:outline-none focus:ring-2 focus:ring-accent"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="portfolio-menu"
+          data-portfolio-button
+        >
+          Portfolio
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4 text-text-muted/45 transition-transform duration-200 ease-out" aria-hidden="true" data-portfolio-icon>
+            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+          </svg>
+        </button>
 
-  <div
-    id="mobile-menu"
-    class="md:hidden hidden fixed inset-0 top-16 bg-background/95 backdrop-blur-lg z-40"
-    role="dialog"
-    aria-label="Mobile navigation"
-  >
-    <ul class="flex flex-col items-center gap-6 pt-12" role="list">
-      {items.map((item) => (
-        <li>
-          <a
-            href={item.href}
-            class="text-lg font-medium text-text-primary hover:text-accent transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent rounded-lg px-3 py-2"
-            data-mobile-link={item.id}
-          >
-            {item.label}
-          </a>
-        </li>
-      ))}
-    </ul>
+        <div
+          id="portfolio-menu"
+          class="hidden absolute left-1/2 top-full z-50 mt-3 w-[520px] -translate-x-1/2 translate-y-2 overflow-hidden rounded-2xl border border-primary/10 bg-[var(--surface-strong)]/96 opacity-0 shadow-[0_30px_90px_-50px_rgba(39,33,28,0.8)] backdrop-blur-xl transition-[opacity,transform] duration-200 ease-out"
+          role="menu"
+          aria-labelledby="portfolio-menu-button"
+          data-portfolio-menu
+        >
+
+          <div class="grid grid-cols-2">
+            {portfolioLinks.slice(0, 2).map((item) => (
+              <a href={item.href} class="flex flex-col gap-3 border-b border-primary/10 p-5 transition-[background-color,color] hover:bg-secondary/40 focus:outline-none focus:ring-2 focus:ring-accent" role="menuitem">
+                <h3 class="text-sm font-semibold text-primary">{item.label}</h3>
+                <p class="text-xs leading-relaxed text-text-muted">
+                  {item.id === 'certificates' ? 'Professional certifications and achievements that validate my expertise' :
+                   item.id === 'activities' ? 'Campus engagement and extracurricular projects beyond the classroom' :
+                   ''}
+                </p>
+                <div class="mt-1 flex h-20 w-full items-center justify-center rounded-xl border border-primary/10 bg-background/70">
+                  <svg class="h-9 w-9 text-accent/45" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                  </svg>
+                </div>
+              </a>
+            ))}
+
+            {portfolioLinks.slice(2).map((item) => (
+              <a href={item.href} class="col-span-2 flex flex-col gap-3 p-5 transition-[background-color,color] hover:bg-secondary/40 focus:outline-none focus:ring-2 focus:ring-accent" role="menuitem">
+                <h3 class="text-sm font-semibold text-primary">{item.label}</h3>
+                <p class="text-xs leading-relaxed text-text-muted">
+                  {item.id === 'works' ? 'Before and after photo editing — drag the slider to see the transformation' : ''}
+                </p>
+                <div class="mt-1 flex h-20 w-full items-center justify-center rounded-xl border border-primary/10 bg-background/70">
+                  <svg class="h-9 w-9 text-accent/45" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                </div>
+              </a>
+            ))}
+          </div>
+
+          <div class="flex items-center justify-between border-t border-primary/10 bg-secondary/25 p-3">
+            <div class="flex items-center gap-3 px-2">
+              <div class="flex h-8 w-8 items-center justify-center rounded-full border border-primary/10 bg-background">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4 text-text-muted" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                </svg>
+              </div>
+              <div class="flex flex-col">
+                <span class="text-sm font-semibold text-primary">View All Works</span>
+                <span class="text-xs text-text-muted">Browse my complete portfolio of projects and creative work.</span>
+              </div>
+            </div>
+            <a href="#works" class="flex items-center gap-1 rounded-full border border-primary/15 bg-background px-3 py-1.5 text-xs font-semibold text-primary transition-[background-color,transform] hover:bg-secondary/60 active:scale-[0.97] focus:outline-none focus:ring-2 focus:ring-accent" role="menuitem">
+              See works
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-3 w-3" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+              </svg>
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      {contactItem && (
+        <a
+          href={contactItem.href}
+          class="rounded-full px-3 py-2 text-sm font-medium text-text-muted transition-[background-color,color,transform] hover:bg-secondary/55 hover:text-primary active:scale-[0.97]"
+          data-nav-link={contactItem.id}
+        >
+          {contactItem.label}
+        </a>
+      )}
+    </div>
+
+    <div class="flex shrink-0 items-center gap-2">
+      <a href="#contact" class="hidden rounded-full bg-primary px-4 py-2 text-sm font-semibold text-background shadow-[0_14px_34px_-26px_rgba(39,33,28,0.9)] transition-[background-color,transform,box-shadow] hover:bg-accent hover:shadow-[0_18px_42px_-28px_rgba(154,106,69,0.9)] active:scale-[0.97] md:inline-flex">
+        Contact Me
+      </a>
+      <button
+        id="mobile-menu-toggle"
+        class="rounded-full p-2 text-text-primary transition-[background-color,transform] hover:bg-secondary/55 active:scale-[0.97] md:hidden"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
   </div>
-</header>
+</nav>
+
+<div
+  id="mobile-menu"
+  class="fixed inset-0 top-0 z-40 hidden bg-background/95 backdrop-blur-xl md:hidden"
+  role="dialog"
+  aria-label="Mobile navigation"
+>
+  <div class="flex flex-col items-center gap-6 pt-28">
+    {items.map((item) => (
+      <a
+        href={item.href}
+        class="rounded-full px-4 py-2 text-lg font-medium text-text-primary transition-[color,background-color,transform] duration-200 hover:bg-secondary/45 hover:text-accent active:scale-[0.97] focus:outline-none focus:ring-2 focus:ring-accent"
+        data-mobile-link={item.id}
+      >
+        {item.label}
+      </a>
+    ))}
+  </div>
+</div>
 
 <script>
   function initMobileMenu() {
@@ -69,16 +167,29 @@ const { items } = Astro.props;
     const menu = document.getElementById('mobile-menu');
     if (!toggle || !menu) return;
 
+    let returnFocus: HTMLElement | null = null;
+
     const closeMenu = () => {
       menu.classList.add('hidden');
       if (toggle) toggle.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
+      delete document.body.dataset.mobileMenuLock;
+      if (document.body.dataset.lightboxLock !== 'true') {
+        document.body.style.overflow = '';
+      }
+      if (returnFocus) {
+        returnFocus.focus();
+        returnFocus = null;
+      }
     };
 
     const openMenu = () => {
+      returnFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
       menu.classList.remove('hidden');
       toggle.setAttribute('aria-expanded', 'true');
+      document.body.dataset.mobileMenuLock = 'true';
       document.body.style.overflow = 'hidden';
+      const firstLink = menu.querySelector<HTMLAnchorElement>('a[data-mobile-link]');
+      if (firstLink) firstLink.focus();
     };
 
     toggle.addEventListener('click', () => {
@@ -101,6 +212,102 @@ const { items } = Astro.props;
     });
   }
 
+  function initPortfolioMenu() {
+    const root = document.querySelector<HTMLElement>('[data-portfolio-root]');
+    const button = document.querySelector<HTMLButtonElement>('[data-portfolio-button]');
+    const menu = document.querySelector<HTMLElement>('[data-portfolio-menu]');
+    const icon = document.querySelector<SVGElement>('[data-portfolio-icon]');
+    if (!root || !button || !menu) return;
+
+    let closeTimer: number | undefined;
+
+    const links = Array.from(menu.querySelectorAll<HTMLAnchorElement>('a[role="menuitem"]'));
+
+    const openMenu = (focusFirst = false) => {
+      window.clearTimeout(closeTimer);
+      menu.classList.remove('hidden');
+      requestAnimationFrame(() => {
+        menu.classList.remove('opacity-0', 'translate-y-2');
+        menu.classList.add('opacity-100', 'translate-y-0');
+      });
+      button.setAttribute('aria-expanded', 'true');
+      icon?.classList.add('rotate-180');
+      if (focusFirst && links[0]) links[0].focus();
+    };
+
+    const closeMenu = (returnFocus = false) => {
+      menu.classList.add('opacity-0', 'translate-y-2');
+      menu.classList.remove('opacity-100', 'translate-y-0');
+      button.setAttribute('aria-expanded', 'false');
+      icon?.classList.remove('rotate-180');
+      window.setTimeout(() => {
+        if (button.getAttribute('aria-expanded') === 'false') {
+          menu.classList.add('hidden');
+        }
+      }, 200);
+      if (returnFocus) button.focus();
+    };
+
+    const toggleMenu = () => {
+      if (button.getAttribute('aria-expanded') === 'true') {
+        closeMenu(true);
+      } else {
+        openMenu();
+      }
+    };
+
+    button.addEventListener('click', toggleMenu);
+    button.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowDown' || event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openMenu(true);
+      }
+      if (event.key === 'Escape') {
+        closeMenu(true);
+      }
+    });
+
+    links.forEach((link, index) => {
+      link.addEventListener('click', () => closeMenu());
+      link.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          event.preventDefault();
+          closeMenu(true);
+        }
+        if (event.key === 'ArrowDown') {
+          event.preventDefault();
+          links[(index + 1) % links.length]?.focus();
+        }
+        if (event.key === 'ArrowUp') {
+          event.preventDefault();
+          links[(index - 1 + links.length) % links.length]?.focus();
+        }
+      });
+    });
+
+    root.addEventListener('mouseenter', () => openMenu());
+    root.addEventListener('mouseleave', () => {
+      closeTimer = window.setTimeout(() => closeMenu(), 120);
+    });
+    root.addEventListener('focusout', (event) => {
+      const focusEvent = event as FocusEvent;
+      if (!root.contains(focusEvent.relatedTarget as Node | null)) {
+        closeMenu();
+      }
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!root.contains(event.target as Node | null)) {
+        closeMenu();
+      }
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && button.getAttribute('aria-expanded') === 'true') {
+        closeMenu(true);
+      }
+    });
+  }
+
   function initScrollSpy() {
     const navLinks = document.querySelectorAll('[data-nav-link]');
     const sections = document.querySelectorAll('section[id]');
@@ -112,16 +319,16 @@ const { items } = Astro.props;
         for (const entry of entries) {
           if (entry.isIntersecting) {
             const id = entry.target.getAttribute('id');
-    navLinks.forEach((link) => {
-      const linkId = link.getAttribute('data-nav-link');
-      if (linkId === id) {
-        link.classList.add('text-primary', 'bg-primary/5');
-        link.classList.remove('text-text-muted');
-      } else {
-        link.classList.remove('text-primary', 'bg-primary/5');
-        link.classList.add('text-text-muted');
-      }
-    });
+            navLinks.forEach((link) => {
+              const linkId = link.getAttribute('data-nav-link');
+              if (linkId === id) {
+                link.classList.add('text-primary', 'bg-secondary/55');
+                link.classList.remove('text-text-muted');
+              } else {
+                link.classList.remove('text-primary', 'bg-secondary/55');
+                link.classList.add('text-text-muted');
+              }
+            });
           }
         }
       },
@@ -132,5 +339,6 @@ const { items } = Astro.props;
   }
 
   initMobileMenu();
+  initPortfolioMenu();
   initScrollSpy();
 </script>
