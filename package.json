@@ -10,7 +10,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
-    "lint": "tsc --noEmit",
+    "lint": "astro sync && tsc --noEmit",
     "images:generate": "node scripts/generate-image-variants.js",
     "test": "vitest run",
     "test:watch": "vitest"
