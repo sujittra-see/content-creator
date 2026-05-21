@@ -15,7 +15,7 @@ export const experienceSchema = z.object({
   image: imageSourceSchema.optional(),
   featured: z.boolean().default(false),
   order: z.number(),
-  figmaEmbedUrl: z.string().refine(isSafeFigmaEmbedUrl, 'Figma embed URL must be a safe https://www.figma.com/embed URL').optional(),
+  figmaEmbedUrl: z.string().refine(isSafeFigmaEmbedUrl, 'Figma embed URL must be a safe Figma embed URL').optional(),
   externalUrl: z.string().refine(isSafeHttpsUrl, 'External URL must use https').optional(),
 });
 

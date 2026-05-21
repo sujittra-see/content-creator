@@ -91,7 +91,7 @@ describe('Experience Schema Validation', () => {
   it('allows only safe Figma embed URLs', () => {
     const result = experienceSchema.safeParse({
       ...validExperience,
-      figmaEmbedUrl: 'https://www.figma.com/embed?embed_host=astra&url=https://www.figma.com/file/example-restaurant-search',
+      figmaEmbedUrl: 'https://embed.figma.com/proto/QtVABLRb8PNhDsgOwU9VxJ/DS?node-id=207-404&starting-point-node-id=207%3A404&embed-host=share',
     });
 
     expect(result.success).toBe(true);

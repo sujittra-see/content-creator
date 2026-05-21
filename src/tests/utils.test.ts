@@ -13,10 +13,14 @@ describe('URL utilities', () => {
 
   it('validates Figma embed URLs and derives the open URL safely', () => {
     const embedUrl = 'https://www.figma.com/embed?embed_host=astra&url=https://www.figma.com/proto/example';
+    const protoEmbedUrl = 'https://embed.figma.com/proto/QtVABLRb8PNhDsgOwU9VxJ/DS?node-id=207-404&starting-point-node-id=207%3A404&embed-host=share';
 
     expect(isSafeFigmaEmbedUrl(embedUrl)).toBe(true);
     expect(getFigmaOpenUrl(embedUrl)).toBe('https://www.figma.com/proto/example');
+    expect(isSafeFigmaEmbedUrl(protoEmbedUrl)).toBe(true);
+    expect(getFigmaOpenUrl(protoEmbedUrl)).toBe('https://www.figma.com/proto/QtVABLRb8PNhDsgOwU9VxJ/DS?node-id=207-404&starting-point-node-id=207%3A404&embed-host=share');
     expect(isSafeFigmaEmbedUrl('https://www.figma.com/embed?url=https://evil.example/proto/example')).toBe(false);
+    expect(isSafeFigmaEmbedUrl('https://embed.figma.com/file/QtVABLRb8PNhDsgOwU9VxJ/DS')).toBe(false);
   });
 });
 
